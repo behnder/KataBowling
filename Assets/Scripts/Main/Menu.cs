@@ -1,28 +1,19 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class Menu : MonoBehaviour
+public class Menu // : MonoBehaviour
 {
 
     public const int MAX_PINES = 10;
-  
+
 
     public List<List<int>> rounds = new List<List<int>>();
 
 
     private void Awake()
     {
+
         Game();
-
-        foreach (var item in rounds)
-        {
-            print("Total " + item[0]);
-            print("Primera " + item[1]);
-            print("Segunda " + item[2]);
-            print("------------------");
-
-        }
     }
 
 
@@ -52,19 +43,20 @@ public class Menu : MonoBehaviour
 
             }
         }
+        rounds.Add(PlayOneRound());
         CheckBonus();
     }
 
     public void CheckBonus()
     {
         var totalBonificacion = 0;
-        if (IsThisRoundStrike(rounds[rounds.Count-1]))
+        if (IsThisRoundStrike(rounds[rounds.Count - 1]))
         {
 
             totalBonificacion = PlayOneRound()[0];
-        
+
         }
-        else if (IsThisRoundSpare(rounds[rounds.Count-1]))
+        else if (IsThisRoundSpare(rounds[rounds.Count - 1]))
         {
             totalBonificacion = PlayOneRound()[1];
         }
@@ -82,7 +74,7 @@ public class Menu : MonoBehaviour
         }
         return score;
 
-     
+
     }
 
     public bool IsThisRoundStrike(List<int> round)
